@@ -306,6 +306,7 @@
         android:paddingLeft="@dimen/help_cardview_horizontal_padding"
         android:paddingRight="@dimen/help_cardview_horizontal_padding"
         card_view:cardCornerRadius="@dimen/help_cardview_card_corner_radius"
+
         card_view:cardElevation="@dimen/help_cardview_card_elevation"
         card_view:cardUseCompatPadding="true">
 

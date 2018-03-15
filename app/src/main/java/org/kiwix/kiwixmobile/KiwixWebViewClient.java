@@ -109,30 +109,31 @@ public class KiwixWebViewClient extends WebViewClient {
 
         help = (LinearLayout) inflater.inflate(R.layout.help, null);
 
-        CardView cardView=help.findViewById(R.id.feedback_card);
+        CardView cardView = help.findViewById(R.id.feedback_card);
         if (settings.getBoolean(PREF_BOTTOM_TOOLBAR, false)) {
           LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-          params.setMargins(0,0,0,56);
+          params.setMargins(0, 0, 0, 56);
           cardView.setLayoutParams(params);
-        }else{
+        } else {
           LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-          params.setMargins(0,0,0,0);
+          params.setMargins(0, 0, 0, 0);
           cardView.setLayoutParams(params);
+//        }
+          help.findViewById(R.id.get_content_card)
+                  .setOnClickListener(card -> {
+                            help.findViewById(R.id.get_content_card).setEnabled(false);
+                            callback.manageZimFiles(1);
+                          }
+                  );
+          view.addView(help);
+
+
+          TextView contact = help.findViewById(R.id.welcome21);
+          contact.setText(StyleUtils.highlightUrl(contact.getText().toString(), CONTACT_EMAIL_ADDRESS));
+          contact.setOnClickListener(v -> callback.sendContactEmail());
         }
-        help.findViewById(R.id.get_content_card)
-            .setOnClickListener(card -> {
-                  help.findViewById(R.id.get_content_card).setEnabled(false);
-                  callback.manageZimFiles(1);
-            }
-            );
-        view.addView(help);
-
-
-        TextView contact = help.findViewById(R.id.welcome21);
-        contact.setText(StyleUtils.highlightUrl(contact.getText().toString(), CONTACT_EMAIL_ADDRESS));
-        contact.setOnClickListener(v -> callback.sendContactEmail());
       }
+      callback.webViewUrlFinishedLoading();
     }
-    callback.webViewUrlFinishedLoading();
   }
 }
